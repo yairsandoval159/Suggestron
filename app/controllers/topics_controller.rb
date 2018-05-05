@@ -1,4 +1,4 @@
-class TopicsController < ApplicationController
+  class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   # GET /topics
@@ -59,6 +59,13 @@ class TopicsController < ApplicationController
       format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  #TODO: REfacetor - move to separate controller.
+  def upvote
+    @topic = topic.find(params[:id])
+    @topic.votes.create
+    redirect_to(topics_path)
   end
 
   private
